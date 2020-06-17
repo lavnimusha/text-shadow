@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>CSS Text Shadow Mouse Move Effect</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            h1{
+                text-shadow: 10px 10px 0 rgba(0,0,0,1);
+                font-size: 100px;
+                margin: 40vh auto;
+                width: 50vw;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="hero">
+            <h1 contenteditable="true">&#9924; WHOA!</h1>
+        </div>
+        
+    <script>
+        const main = document.querySelector('.hero');
+        const text = main.querySelector('h1');
+        const walk = 400;//100px
+        main.addEventListener('mousemove',handler);
+
+        function handler(event){
+            const {offsetWidth: width, ofsetHeight: height} = main;
+            let {offsetX: x, offsetY: y} = event;
+
+            if(this !== event.target){
+                x = x + event.target.offsetLeft;
+                y = y + event.target.offsetTop;
+            }
+            const xWalk = Math.round(x / width * walk) - (walk / 2);
+            const yWalk = Math.round(y / width * walk) - (walk / 2);
+
+            text.style.textShadow = `${xWalk}px ${yWalk}px 0 red,
+            ${xWalk * -1}px ${yWalk}px 0 rgba(255,0,255, 0.7),
+            ${xWalk}px ${yWalk * -1}px 0 rgba(0,125,90,0.6),
+            ${yWalk}px ${xWalk * -1}px 0 rgba(255,125,90,0.6)
+            ` ;
+            console.log(xWalk, yWalk);
+
+        }
+
+    </script>
+    </body>
+</html>
